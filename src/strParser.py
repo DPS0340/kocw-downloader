@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup
-from systemInfo import SystemInfo
 import requests
 
 class StrParser:
