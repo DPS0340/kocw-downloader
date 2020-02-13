@@ -21,7 +21,7 @@ class Downloader:
 
             if not SystemInfo.pdfIncluded or count % 2 == 1:
                 code = uri.split("/")[-1]
-                self.fileHandler.safeMkdir("%s/output/%s/video" % (self.name, self.path))
+                self.fileHandler.safeMkdir("%s/output/%s/video" % (self.path, self.name))
                 downloadUri = self.videoUriFormat % code
                 print("%s 다운로드 중..." % (downloadUri))
                 res = requests.get(downloadUri)
@@ -29,5 +29,5 @@ class Downloader:
             else:
                 print("%s 다운로드 중..." % uri) 
                 res = requests.get(uri)
-                self.fileHandler.safeMkdir("%s/output/%s/pdf" % (self.name, self.path))
+                self.fileHandler.safeMkdir("%s/output/%s/pdf" % (self.path, self.name))
                 self.fileHandler.saveBinaryFile(res.content, "pdf", count, "pdf")
