@@ -8,6 +8,8 @@ class Main:
         self.soupHandler = SoupHandler(SystemInfo.initUri)
         self.downloader = Downloader()
         self.fileHandler = FileHandler()
+        self.path = SystemInfo.path
+        self.name = SystemInfo.name
 
     def introduce(self):
         print("kocw 다운로드 프로그램.")
@@ -20,7 +22,9 @@ class Main:
     def run(self):
         self.introduce()
         
-        self.fileHandler.safeMkdir("%s/output" % SystemInfo.path)
+        self.fileHandler.safeMkdir("%s/output" % self.path)
+        self.fileHandler.safeMkdir("%s/output/%s" % (self.path, self.name))
+
 
         table = self.soupHandler.findTable()
         parsedOnClickStrings = self.soupHandler.parseOnClick(table)
