@@ -7,6 +7,7 @@ class FileHandler:
         self.name = SystemInfo.name
 
     def safeMkdir(self, path):
+        print(path)
         if not os.path.exists(path):
             os.makedirs(path)
             return True

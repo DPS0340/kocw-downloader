@@ -6,7 +6,7 @@ import requests
 class Downloader:
     def __init__(self):
         self.path = SystemInfo.path
-        self.name = SystemInfo.path
+        self.name = SystemInfo.name
         self.videoUriFormat = SystemInfo.videoUriFormat
         self.fileHandler = FileHandler()
         self.strParser = StrParser()
@@ -25,9 +25,12 @@ class Downloader:
                 downloadUri = self.videoUriFormat % code
                 print("%s 다운로드 중..." % (downloadUri))
                 res = requests.get(downloadUri)
-                self.fileHandler.saveBinaryFile(res.content, "video", count, "mp4")
+                if SystemInfo.pdfIncluded:
+                    number = (count + 1) // 2    
+                self.fileHandler.saveBinaryFile(res.content, "video", number, "mp4")
             else:
                 print("%s 다운로드 중..." % uri) 
                 res = requests.get(uri)
                 self.fileHandler.safeMkdir("%s/output/%s/pdf" % (self.path, self.name))
-                self.fileHandler.saveBinaryFile(res.content, "pdf", count, "pdf")
+                number = (count + 1) // 2
+                self.fileHandler.saveBinaryFile(res.content, "pdf", number, "pdf")
